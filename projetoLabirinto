@@ -24,6 +24,8 @@ int main(){
 void preencher_matriz_inicial(char **matriz, int x, int y){
 	//codigo da matriz
 	int i;
+	
+	//preenchendo a linha 0 e a linha x-1
 	for(i = 0; i < y; i++){
 		if(i % 2 == 0){
 			matriz[0][i] = '+';
@@ -34,9 +36,19 @@ void preencher_matriz_inicial(char **matriz, int x, int y){
 		}
 	}
 	
+	for(i = 0; i < x - 2; i++){
+		if(i % 2 == 0){
+			matriz[i][0] = '+';
+			matriz[i][y-1] = '+';
+		}else{
+			matriz[i][0] = '|';
+			matriz[i][y-1] = '|';
+		}
+	}
+
 	int j;
 	for(i = 0; i < x; i++){
-		for(j = 0; j < y; j++){
+		for(j = 1; j < y-1; j++){
 			if(matriz[i][j] != '+' && matriz[i][j] != '-'){
 				matriz[i][j] = ' ';
 			}
