@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+//prototipo
+void printar_labirinto(char **matriz, int x, int y);
+void preencher_matriz_inicial(char **matriz, int x, int y);
+char **deslocando_espaco(char **matriz, int x, int y);
+
+
+int main(){
+	int lin, col;
+	printf("Digite linha e a coluna da matriz\n");
+	scanf("%d %d", &lin, &col);
+	
+	char **matriz = deslocando_espaco(matriz, lin, col);
+	
+	preencher_matriz_inicial(matriz, lin, col);
+	printar_labirinto(matriz, lin, col);
+	
+	return 0;
+}
+
+void preencher_matriz_inicial(char **matriz, int x, int y){
+	//codigo da matriz
+	int i;
+	for(i = 0; i < y; i++){
+		if(i % 2 == 0){
+			matriz[0][i] = '+';
+			matriz[x-1][i] = '+';
+		}else{
+			matriz[0][i] = '-';
+			matriz[x-1][i] = '-';
+		}
+	}
+	
+	int j;
+	for(i = 0; i < x; i++){
+		for(j = 0; j < y; j++){
+			if(matriz[i][j] != '+' && matriz[i][j] != '-'){
+				matriz[i][j] = ' ';
+			}
+		}
+	}
+	
+	matriz[1][0] = ' ';
+	matriz[x-1][y] = ' ';	
+}
+
+void printar_labirinto(char **matriz, int x, int y){
+	int i, j;
+	for(i = 0; i < x; i++){
+		for(j = 0; j < y; j++){
+			printf("%c ", matriz[i][j]);
+		}
+		printf("\n");
+	}	
+}
+
+char **deslocando_espaco(char **matriz, int x, int y){
+	matriz = (char**) malloc(sizeof(char*) * x);
+	
+	int i;
+	for(i = 0; i < x; i++){
+		matriz[i] = (char*) malloc(sizeof(char) * y);
+	}
+	
+	return matriz;
+}
+
+
+
